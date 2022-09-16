@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "734585854710",
+    "project_id": "notelist-flutterproject-01",
+    "storage_bucket": "notelist-flutterproject-01.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:734585854710:android:b540718745b15d2c502ad7",
+        "android_client_info": {
+          "package_name": "mx.graywolf.notelist"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "734585854710-tvrkd3ib6c81k296sfhsku6r5c62ntt7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBUIGKiJIBew_tNvQK7Qb8C-dLG8d0Zw5g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "734585854710-tvrkd3ib6c81k296sfhsku6r5c62ntt7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -3,6 +3,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:notelist/firebase_options.dart';
 import 'package:notelist/views/login_view.dart';
+import 'package:notelist/views/register_view.dart';
+import 'package:notelist/views/verify_email_view.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -13,6 +15,11 @@ void main() {
         primarySwatch: Colors.blue,
       ),
       home: const HomePage(), 
+      routes: {
+        '/login': (context) => const LoginView(),
+        '/register':(context) => const RegisterView(),
+        '/verification':(context) => const VerifyEmailView(),  
+      }
     ),
   );
 }
@@ -22,29 +29,27 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Home Page'),
+    return FutureBuilder(
+      future: Firebase.initializeApp(
+        options: DefaultFirebaseOptions.currentPlatform,
       ),
-      body: FutureBuilder(
-        future: Firebase.initializeApp(
-          options: DefaultFirebaseOptions.currentPlatform,
-        ),
-        builder: (context, snapshot) {
-          switch(snapshot.connectionState) {
-            case ConnectionState.done:
-              final user = FirebaseAuth.instance.currentUser;
-              if(user?.emailVerified ?? false) {
-                print('User verified');
-              } else {
-                print('User not verified');
-              }
-              return const Text('Done');
-            default:
-              return const Text('Loading...');
-          }
+      builder: (context, snapshot) {
+        switch(snapshot.connectionState) {
+          case ConnectionState.done:
+            final user = FirebaseAuth.instance.currentUser;
+            if(user?.emailVerified ?? false) {
+              return const LoginView();
+            } else {
+              return const VerifyEmailView();
+            }
+          default:
+            return const CircularProgressIndicator();
         }
-      ),
+      }
     );
   }
 }
+
+// Notes
+
+// - Posiblemente se necesite remover el Scaffold de RegisterView

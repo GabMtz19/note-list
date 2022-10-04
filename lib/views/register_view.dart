@@ -59,14 +59,17 @@ class _RegisterViewState extends State<RegisterView> {
               final email = emailController.text;
               final password = passwordController.text;
               try {
-                final userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+                await FirebaseAuth.instance.createUserWithEmailAndPassword(
                   email: email,
                   password: password
                 );
-                print(userCredential);
               } on FirebaseAuthException catch (e) {
-                print('Authentication Error');
-                print('Error: ${e.message}');
+                Column(
+                  children: [
+                    const Text('Authentication Error'),
+                    Text(e.message ?? 'No error'),
+                  ],
+                );
               }
             },
             child: const Text('Register'),

@@ -1,4 +1,3 @@
-import 'dart:developer' as devTools show log;
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -22,12 +21,12 @@ class _NotesViewState extends State<NotesView> {
             onSelected: (value) async {
               switch(value) {
                 case MenuAction.logout:
-                  final shouldLogout = await showLogOutDialog(context);
-                  if(shouldLogout) {
+                  if(await showLogOutDialog(context)) {
                     Navigator.of(context).pushNamedAndRemoveUntil(
                       '/login',
                       (_) => false,
                     );
+                    await FirebaseAuth.instance.signOut();
                   }
                 break;
               }
@@ -36,7 +35,7 @@ class _NotesViewState extends State<NotesView> {
               return [
                 const PopupMenuItem<MenuAction>(
                   value: MenuAction.logout,
-                  child: Text('Log Out'),
+                  child: Text('Sign Out'),
                 )
               ];
             },

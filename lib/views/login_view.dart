@@ -58,7 +58,14 @@ class _LoginViewState extends State<LoginView> {
               final email = emailController.text;
               final password = passwordController.text;
               try {
-                await FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: password);
+                await FirebaseAuth.instance.signInWithEmailAndPassword(
+                  email: email,
+                  password: password
+                );
+                Navigator.of(context).pushNamedAndRemoveUntil(
+                  '/notes',
+                  (_) => false,
+                );
               } on FirebaseAuthException catch (e) {
                 Text(e.message ?? 'No error');
               }
@@ -67,7 +74,10 @@ class _LoginViewState extends State<LoginView> {
           ),
           TextButton(
             onPressed: () {
-              Navigator.of(context).pushNamedAndRemoveUntil('/register', (route) => false);
+              Navigator.of(context).pushNamedAndRemoveUntil(
+                '/register',
+                (_) => false
+              );
             },
             child: const Text('Not registered yet? Register here.'),
           ),

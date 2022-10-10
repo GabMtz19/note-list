@@ -50,7 +50,14 @@ class HomePage extends StatelessWidget {
               return const LoginView();
             }
           default:
-            return const CircularProgressIndicator();
+            return Scaffold(
+              appBar: AppBar(
+                title: const Text('Loading...'),
+              ),
+              body: const Center(
+                child: CircularProgressIndicator(),
+              ),
+            );
         }
       }
     );

@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../constants/routes.dart';
+import '../utilities/dialogs.dart';
 
 enum MenuAction { logout }
 
@@ -13,6 +14,7 @@ class NotesView extends StatefulWidget {
 }
 
 class _NotesViewState extends State<NotesView> {
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,29 +51,5 @@ class _NotesViewState extends State<NotesView> {
       ),
     );
   }
-}
 
-Future<bool> showLogOutDialog(BuildContext context) {
-  return showDialog<bool>(context: context,
-   builder:(context) {
-    return AlertDialog(
-      title: const Text('Sign Out'),
-      content: const Text('Are you sure you want to sign out?'),
-      actions: [
-        TextButton(
-          onPressed: () async {
-            Navigator.of(context).pop(false);
-          }, 
-          child: const Text('Cancel')
-        ),
-        TextButton(
-          onPressed: () {
-            Navigator.of(context).pop(true);
-          },
-          child: const Text('Sign Out'),
-        )
-      ],
-    );  
-  },
-  ).then((value) => value ?? false);
 }
